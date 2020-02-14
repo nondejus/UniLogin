@@ -46,6 +46,7 @@
     "@types/web3": "^1.0.19",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "@universal-login/provider": "0.5.9",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^5.2.0",
