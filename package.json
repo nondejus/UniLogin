@@ -7,7 +7,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "@codechecks/build-size-watcher": "^0.0.14",
-    "@codechecks/client": "^0.0.58",
+    "@codechecks/client": "^0.1.10",
     "@codechecks/type-coverage-watcher": "^0.0.8",
     "chalk": "^2.0.1",
     "lerna": "^3.15.0"
@@ -16,6 +16,8 @@
     "universal-login-*"
   ],
   "dependencies": {
+    "node-gyp": "^6.1.0",
+    "sha3": "^2.1.1",
     "wsrun": "^5.2.0"
   },
   "scripts": {

@@ -2,7 +2,7 @@ import chai, {expect} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import sinonChai from 'sinon-chai';
 import sinon from 'sinon';
-import {TEST_TRANSACTION_HASH, INITIAL_GAS_PARAMETERS} from '@unilogin/commons';
+import {TEST_TRANSACTION_HASH, INITIAL_GAS_PARAMETERS, sleep} from '@unilogin/commons';
 import {BackupCodesService} from '../../../src/core/services/BackupCodesService';
 
 chai.use(chaiAsPromised);
@@ -36,12 +36,13 @@ describe('UNIT: BackupCodesService', () => {
       await backupCodesService.generate(undefined);
       expect(backupCodesService.state.get()).to.deep.eq({
         kind: 'Failure',
-        error: 'Missing gas parameters',
+        error: 'Missing parameter: gas parameters',
       });
     });
 
     it('successful call', async () => {
       await backupCodesService.generate(INITIAL_GAS_PARAMETERS);
+      sleep(1000);
       expect(backupCodesService.state.get()).to.deep.eq({
         kind: 'Generated',
         codes: ['350', '506', '372', '483', '576', '48'],
