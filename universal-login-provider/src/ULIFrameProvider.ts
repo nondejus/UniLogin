@@ -103,7 +103,7 @@ export class ULIFrameProvider {
   static create(network: Network, config = DEFAULT_CONFIG) {
     return new ULIFrameProvider({
       enablePicker: false,
-      network,
+      network: network.toString() as Network,
       ...config,
     });
   }
@@ -112,7 +112,7 @@ export class ULIFrameProvider {
     if (typeof upstream === 'string') {
       return new ULIFrameProvider({
         enablePicker: true,
-        network: upstream,
+        network: upstream.toString() as Network,
         ...config,
       });
     } else {
@@ -125,7 +125,7 @@ export class ULIFrameProvider {
   }
 
   async send(msg: any, cb: (error: any, response: any) => void) {
-    await this.isReady.pipe(waitFor(Boolean));
+    await this.waitUntilReady();
     this.bridge.send(msg, cb);
   }
 
@@ -145,6 +145,10 @@ export class ULIFrameProvider {
     this.setDashboardVisibility(false);
   }
 
+  waitUntilReady() {
+    return this.isReady.pipe(waitFor(Boolean));
+  }
+
   private boundOpenDashboard = this.openDashboard.bind(this);
 
   private getNotificationsIndicator = () => document.getElementById(`${this.config.ulButtonId}-notifications`);
@@ -158,17 +162,18 @@ export class ULIFrameProvider {
       position: 'relative',
       width: '60px',
       height: '60px',
+      padding: '0',
     });
 
     element.innerHTML = `
-      <img src="${this.config.logoUrl}" alt="U" >
+      <img style="width: 100%; height: 100%;" src="${this.config.logoUrl}" alt="U" >
       <div id="${this.config.ulButtonId}-notifications"></div>
     `;
     Object.assign(this.getNotificationsIndicator()!.style, {
       display: this.hasNotifications ? 'block' : 'none',
       position: 'absolute',
       top: '0px',
-      right: '0px',
+      right: '-11px',
       width: '15px',
       height: '15px',
       background: '#0FB989',
