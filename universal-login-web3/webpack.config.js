@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 
 module.exports = {
@@ -49,6 +50,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/ui/index.html',
     }),
+    new BundleAnalyzerPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
